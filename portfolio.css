@@ -1,0 +1,45 @@
+/* Daniel Flynn
+    Summer  2022*/
+
+
+body {
+    background-color: #bbb;
+}
+
+.mamorlis {
+    background-image: url("Mamorlis Banner.jpg");
+    background-repeat: no-repeat;
+    padding: 12px 16px;
+    width: 666px;
+    height: 200px;
+}
+
+.mamorlis:hover {
+    filter:invert();
+}
+
+.music {
+    padding-left: 250px;
+    padding-top: 150px;
+    /* float: right; */
+}
+
+.top_nav_bar {
+    background-color: #666;
+    overflow: hidden;
+}
+
+.top_nav_bar a {
+    float: left;
+    color:aliceblue;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.top_nav_bar a:hover {
+    background-color: #999;
+    color: black;
+}
