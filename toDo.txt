@@ -1,4 +1,23 @@
 todo:
 
-connect to heroku
+    connect to heroku
+
+
+    Game Elements:
+        Have start menu for all games, utilize single startmenu function for all games
+
+        Have control over mouse in own file
+
+    Break_out:
+        have more levels for game, increase block size, decrease paddle size
+    
+    Mercenary:
+        have character / monster move around map
+    
+    Shoot_Em game:
+        Have badguy color change based on internal timer (green: safe, yellow: caution, red: danger)
+
+    
+    Bottom right Monster:
+        Have a random daily spawn of a monster for users to interact with.
 

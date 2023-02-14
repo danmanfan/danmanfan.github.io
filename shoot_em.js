@@ -1,12 +1,12 @@
 // arcade shooter
 
-    let canvas = document.getElementById("shoot_em_canvas");
-    let ctx = canvas.getContext("2d");
+    let shoot_em_canvas = document.getElementById("shoot_em_canvas");
+    let shoot_em_ctx = shoot_em_canvas.getContext("2d");
 
-    let bob = badguy(canvas.width + 25, canvas.height - 25);
+    // let bob = badguy(shoot_em_canvas.width + 25, shoot_em_canvas.height - 25);
 
-    let then = Date.now();
-    let ref = 100;
+    let shoot_em_then = Date.now();
+    let ref = 1000;
     let iRef = 0;
 
 
@@ -21,23 +21,23 @@
         this.lArmHeight = 90;
         this.legHeight = 90;
         this.legWidth = 20;
-        this.status = ['#00ff40', '#ffff00', '#ff0000'];
+        this.status = ["#00ff40", "#ffff00", "#ff0000"];
         this.s = 0; // current status of badguy
     }
 
 
     function drawBadGuy(theBadguy) {
-        ctx.beginPath();
-        ctx.arc(theBadguy?.x, theBadguy?.y, theBadguy?.headRadius, 0 , Math.PI*2);
-        ctx.fillStyle = theBadguy?.status[theBadguy?.s];
-        ctx.fill();
-        
-        ctx.rect(theBadguy?.x, theBadguy?.y + theBadguy?.headRadius, theBadguy?.bodyWidth, theBadguy?.bodyHeight);
-        // ctx.fillStyle = theBadguy.status[theStatus];
-        ctx.fill();
+        shoot_em_ctx.beginPath();
+        shoot_em_ctx.arc(theBadguy?.x, theBadguy?.y, theBadguy?.headRadius, 0 , Math.PI*2);
+        shoot_em_ctx.fillStyle = theBadguy?.status[theBadguy?.s];
+        // shoot_em_ctx.fill();
+        // console.log(theBadguy.status[1]);
+        shoot_em_ctx.rect(theBadguy?.x/2, theBadguy?.y + theBadguy?.headRadius, theBadguy?.bodyWidth, theBadguy?.bodyHeight);
+        // shoot_em_ctx.fillStyle = theBadguy.status[theBadguy?.s];
+        shoot_em_ctx.fill();
         
 
-        ctx.closePath();
+        shoot_em_ctx.closePath();
 
 
 
@@ -45,18 +45,25 @@
 
     function drawShootEm(){
         let sNow = Date.now();
-        let sElapsed = sNow - then;
+        let sElapsed = sNow - shoot_em_then;
 
         if (sElapsed > 100 / 9) {
             iRef = iRef + 1;
 
-            then = Date.now();
+            shoot_em_then = Date.now();
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            shoot_em_ctx.clearRect(0, 0, shoot_em_canvas.width, shoot_em_canvas.height);
+            let bob = new badguy(25, 25);
+            // console.log(bob.status[1]);
             drawBadGuy(bob);
 
 
+        } // end if sElapsed > 100 / 9
+
+        if(iRef < ref) {
+            requestAnimationFrame(drawShootEm);
         }
+
 
     }
 

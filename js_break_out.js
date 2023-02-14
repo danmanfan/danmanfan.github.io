@@ -179,6 +179,7 @@
                 ctx.fillStyle = "#000000";
                 ctx.rect(0, 0, canvas.width, canvas.height);
                 ctx.fill();
+                ctx.closePath();
             }
 
             function drawBricks() {
@@ -278,7 +279,7 @@
                     // y = canvas.height-ballRadius+1;
                 }
 
-                }
+                } // end if elapsed > 100 / 9
                 if(play) {
                     requestAnimationFrame(draw);
                 }
