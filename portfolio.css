@@ -67,3 +67,8 @@ body {
     background-color: #999;
     color: black;
 }
+
+.citation {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
