@@ -18,8 +18,32 @@ body {
     filter:invert();
 }
 
+#mamorlis_table {
+    padding-left: 115px;
+    padding-top: 11px;
+}
+
+#M_amorlis {
+    width: 111px;
+    height: 160px;
+}
+
+#mamorlis_space {
+    height:60px;
+    width: 322px;
+}
+
+#amorlis {
+    width: 322px;
+    height: 66px;
+}
+
+#breakout {
+    width: 500px;
+}
+
 .music {
-    padding-left: 250px;
+    padding-left: 300px;
     padding-top: 150px;
     /* float: right; */
 }
