@@ -2,12 +2,13 @@
     Summer  2022*/
 
 
-body {
-    /* background-color: black; */
-    /* background-color: #bbb; */
+/* body {
+    /* background-color: black;
+    background-color: #bbb; 
     background-image: url("art001e000343_orig.jpg");
-    background-size: cover;
-}
+    background-repeat: no-repeat;
+    background-size: cover; 
+} */
 
 
 
@@ -29,6 +30,14 @@ body {
     min-height: 100%;
     
 } */
+
+#live_background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
 
 .content {
     position: fixed;
@@ -75,6 +84,7 @@ body {
 }
 
 #breakout {
+    position: fixed;
     width: 500px;
 }
 

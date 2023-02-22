@@ -126,6 +126,7 @@
 
             function drawMenu() {
                 drawBackground();
+                ctx.beginPath();
                 if(hover) {
                     ctx.font = "32px Arial";
                     ctx.fillStyle = "#0035DD";
@@ -143,18 +144,23 @@
                         ctx.fillText("CLICK TO RESUME!", canvas.width/8, canvas.height/2);
                     }
                 }
+                ctx.closePath();
             }
 
             function drawScore() {
+                ctx.beginPath();
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#0095DD";
                 ctx.fillText("Score: "+score, 8, 20);
+                ctx.closePath();
             }
 
             function drawLives() {
+                ctx.beginPath();
                 ctx.font = "16px Arial";
                 ctx.fillStyle = "#0095DD";
                 ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+                ctx.closePath();
             }
 
 
@@ -176,6 +182,7 @@
             }
 
             function drawBackground() {
+                ctx.beginPath();
                 ctx.fillStyle = "#000000";
                 ctx.rect(0, 0, canvas.width, canvas.height);
                 ctx.fill();
@@ -208,7 +215,7 @@
 
                 if(elapsed > 100 / 9) {
                 then = Date.now();
-
+                ctx.beginPath();
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 drawBackground();
                 drawBricks();
@@ -280,9 +287,10 @@
                 }
 
                 } // end if elapsed > 100 / 9
-                if(play) {
-                    requestAnimationFrame(draw);
-                }
+                // if(play) {
+                //     requestAnimationFrame(draw);
+                // }
+                ctx.closePath();
             }
 
             function mainMenu() {
@@ -293,8 +301,7 @@
                     drawMenu();
                 }
 
-
-                requestAnimationFrame(mainMenu);
+                // requestAnimationFrame(mainMenu);
 
             }
 
