@@ -31,6 +31,21 @@
     
 } */
 
+
+.title {
+
+}
+
+#Profile_Statement{
+    /* background-color: azure;
+    opacity: 50%; */
+}
+
+.CV_Content {
+    background-color: azure;
+    opacity: 75%;
+}
+
 #live_background {
     position: fixed;
     right: 0;
@@ -45,6 +60,13 @@
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
+    /* overflow-y: scroll; */
+}
+
+.Scroll_Content {
+    height: 475px;
+    overflow-y: auto;
+
 }
 
 .mamorlis {
@@ -84,7 +106,7 @@
 }
 
 #breakout {
-    position: fixed;
+    /* position: fixed; */
     width: 500px;
 }
 

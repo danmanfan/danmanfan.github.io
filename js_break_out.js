@@ -50,8 +50,9 @@
             document.addEventListener("mousedown", mouseDownHandler, false);
 
             function mouseDownHandler(e) {
-                let relativeX = e.clientX - canvas.offsetLeft;
-                let relativeY = e.clientY - canvas.offsetTop;
+                let canvas_rect = canvas.getBoundingClientRect();
+                let relativeX = e.clientX - canvas_rect.left;
+                let relativeY = e.clientY - canvas_rect.top;
                 if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
 
                     if(play) {
@@ -64,8 +65,9 @@
             }
 
             function mouseMoveHandler(e) {
-                let relativeX = e.clientX - canvas.offsetLeft;
-                let relativeY = e.clientY - canvas.offsetTop;
+                let canvas_rect = canvas.getBoundingClientRect();
+                let relativeX = e.clientX - canvas_rect.left;
+                let relativeY = e.clientY - canvas_rect.top;
                 if(!play) {
                     if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
                         hover = true;
@@ -73,6 +75,7 @@
                         hover = false;
                     }
                 }
+                // console.log();
 
                 if(relativeX > paddleWidth/2 && relativeX < canvas.width - paddleWidth/2) {
                     dv = paddleX;
