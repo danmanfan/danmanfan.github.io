@@ -64,7 +64,7 @@
 }
 
 .Scroll_Content {
-    height: 475px;
+    height: 475px; /* works on desktop but not so well on mobile*/
     overflow-y: auto;
 
 }

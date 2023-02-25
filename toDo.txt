@@ -2,11 +2,20 @@ todo:
 
     connect to heroku
 
+    Background:
+        Background should start at a random area of image and move toward furthest distance with fade in / out action when hitting edge of image.  
+
+    Scroll_Content:
+        Scroll content shows up fine on desktop but, not so well on mobile.
+
 
     Game Elements:
         Have start menu for all games, utilize single startmenu function for all games
 
         Have control over mouse in own file
+
+    JSteroids:
+        Convert python space rocks game into javascript.
 
     Break_out:
         have more levels for game, increase block size, decrease paddle size
