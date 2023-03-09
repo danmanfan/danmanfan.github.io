@@ -8,8 +8,8 @@
             let paddleHeight = 10;
             let paddleWidth = 75;
             let paddleX = (canvas.width-paddleWidth) / 2;
-            let rightPressed = false;
-            let leftPressed = false;
+            // let rightPressed = false;
+            // let leftPressed = false;
             let x = canvas.width/2;
             let y = canvas.height-30;
             let dx = 0;
@@ -55,6 +55,8 @@
                     this.play = false;
                     this.start = false;
                     this.hover = false;
+                    this.leftPressed = false;
+                    this.rightPressed = false;
                 }
               
             }
@@ -63,8 +65,8 @@
 
 
 
-            document.addEventListener("keydown", keyDownHandler, false);
-            document.addEventListener("keyup", keyUpHandler, false);
+            // document.addEventListener("keydown", keyDownHandler, false);
+            // document.addEventListener("keyup", keyUpHandler, false);
             
             function paddleMoveHandler(the_relative_x) {
                 if(the_relative_x > paddleWidth/2 && the_relative_x < canvas.width - paddleWidth/2) {
@@ -79,26 +81,30 @@
 
             }
 
-            function keyDownHandler(e) {
-                if(e.key =="Right" || e.key == "ArrowRight") {
-                    rightPressed = true;
-                }
-                else if(e.key == "Left" || e.key == "ArrowLeft") {
-                    leftPressed = true;
-                }
-                else if((e.key == "Up" || e.key == "ArrowUp") && jsBreakOut.play) {
-                    jsBreakOut.start = true;
-                }
-            }
+            // function keyDownHandler(e) {
+            //     if(e.key =="Right" || e.key == "ArrowRight") {
+            //         jsBreakOut.rightPressed = true;
+            //     }
+            //     else if(e.key == "Left" || e.key == "ArrowLeft") {
+            //         jsBreakOut.leftPressed = true;
+            //     }
+            //     else if((e.key == "Up" || e.key == "ArrowUp") && jsBreakOut.play) {
+            //         e.preventDefault();
+            //         jsBreakOut.start = true;
+            //     }
+            //     else if((e.key == "Down" || e.key == "ArrowDown") && jsBreakOut.play) {
+            //         e.preventDefault();
+            //     }
+            // }
 
-            function keyUpHandler(e) {
-                if(e.key == "Right" || e.key == "ArrowRight") {
-                    rightPressed = false;
-                }
-                else if(e.key == "Left" || e.key == "ArrowLeft") {
-                    leftPressed = false;
-                }
-            }
+            // function keyUpHandler(e) {
+            //     if(e.key == "Right" || e.key == "ArrowRight") {
+            //         jsBreakOut.rightPressed = false;
+            //     }
+            //     else if(e.key == "Left" || e.key == "ArrowLeft") {
+            //         jsBreakOut.leftPressed = false;
+            //     }
+            // }
 
             function collisionDetection() {
                 for(var c=0; c<brickColumnCount; c++) {
@@ -259,14 +265,14 @@
                         }
                     }
                 }
-                if(rightPressed) {
+                if(jsBreakOut.rightPressed) {
                     paddleX += 7;
                     dv = 5; // should be 7 but its 5 just because.
                     if (paddleX + paddleWidth > canvas.width) {
                         paddleX = canvas.width - paddleWidth;
                     }
                 }
-                else if(leftPressed) {
+                else if(jsBreakOut.leftPressed) {
                     paddleX -= 7;
                     dv = -5;
                     if (paddleX < 0){

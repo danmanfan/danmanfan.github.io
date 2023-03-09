@@ -6,8 +6,8 @@ let breakout_canvas = document.getElementById("breakout_canvas");
 // let space_rocks_canvas = document.getElementById("space_rocks_canvas");
 // let js_breakout = new JSBreakOut();
 
-// document.addEventListener("keydown", keyDownHandler, false);
-// document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("mousedown", mouseDownHandler, false);
 
@@ -65,4 +65,30 @@ function mouseMoveHelper(the_canvas, the_client_x, the_client_y, the_game_cons, 
 
     the_fun_callback_x(relative_x);
 
+}
+
+
+function keyDownHandler(e) {
+    if(e.key =="Right" || e.key == "ArrowRight") {
+        jsBreakOut.rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        jsBreakOut.leftPressed = true;
+    }
+    else if((e.key == "Up" || e.key == "ArrowUp") && jsBreakOut.play) {
+        e.preventDefault();
+        jsBreakOut.start = true;
+    }
+    else if((e.key == "Down" || e.key == "ArrowDown") && jsBreakOut.play) {
+        e.preventDefault();
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        jsBreakOut.rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        jsBreakOut.leftPressed = false;
+    }
 }
