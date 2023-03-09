@@ -24,16 +24,20 @@
             let brickOffsetLeft = 30;
             let score = 0;
             let lives = 3;
-            let play = false;
-            let start = false;
-            let hover = false;
+            // let play = false;
+            // let start = false;
+            // let hover = false;
             let then = Date.now();
 
             let bricks = [];
 
+
+            
+
             // ctx.fillStyle = "#000000";
             // ctx.rect(0, 0, canvas.width, canvas.height);
             // ctx.fill();
+
 
 
             for (var c=0; c<brickColumnCount; c++) {
@@ -44,44 +48,35 @@
                 }
             }
 
-            document.addEventListener("keydown", keyDownHandler, false);
-            document.addEventListener("keyup", keyUpHandler, false);
-            document.addEventListener("mousemove", mouseMoveHandler, false);
-            document.addEventListener("mousedown", mouseDownHandler, false);
 
-            function mouseDownHandler(e) {
-                let canvas_rect = canvas.getBoundingClientRect();
-                let relativeX = e.clientX - canvas_rect.left;
-                let relativeY = e.clientY - canvas_rect.top;
-                if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
 
-                    if(play) {
-                        start = true;
-                    }
-                    play = true;
-                } else {
-                    play = false;
+            class JSBreakOut {
+                constructor(){
+                    this.play = false;
+                    this.start = false;
+                    this.hover = false;
                 }
+              
             }
 
-            function mouseMoveHandler(e) {
-                let canvas_rect = canvas.getBoundingClientRect();
-                let relativeX = e.clientX - canvas_rect.left;
-                let relativeY = e.clientY - canvas_rect.top;
-                if(!play) {
-                    if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
-                        hover = true;
-                    } else {
-                        hover = false;
-                    }
-                }
-                // console.log();
+            var jsBreakOut = new JSBreakOut();
 
-                if(relativeX > paddleWidth/2 && relativeX < canvas.width - paddleWidth/2) {
+
+
+            document.addEventListener("keydown", keyDownHandler, false);
+            document.addEventListener("keyup", keyUpHandler, false);
+            
+            function paddleMoveHandler(the_relative_x) {
+                if(the_relative_x > paddleWidth/2 && the_relative_x < canvas.width - paddleWidth/2) {
                     dv = paddleX;
-                    paddleX = relativeX - paddleWidth/2;
+                    paddleX = the_relative_x - paddleWidth/2;
                     dv = paddleX - dv;
                 }
+
+                console.log()
+
+                // console.log(this.hover);
+
             }
 
             function keyDownHandler(e) {
@@ -91,8 +86,8 @@
                 else if(e.key == "Left" || e.key == "ArrowLeft") {
                     leftPressed = true;
                 }
-                else if((e.key == "Up" || e.key == "ArrowUp") && play) {
-                    start = true;
+                else if((e.key == "Up" || e.key == "ArrowUp") && jsBreakOut.play) {
+                    jsBreakOut.start = true;
                 }
             }
 
@@ -130,10 +125,10 @@
             function drawMenu() {
                 drawBackground();
                 ctx.beginPath();
-                if(hover) {
+                if(jsBreakOut.hover) {
                     ctx.font = "32px Arial";
                     ctx.fillStyle = "#0035DD";
-                    if(!start){
+                    if(!jsBreakOut.start){
                         ctx.fillText("CLICK TO START!", canvas.width/8 , canvas.height/2);
                     } else {
                         ctx.fillText("CLICK TO RESUME!", canvas.width/8, canvas.height/2);
@@ -141,7 +136,7 @@
                 } else {
                     ctx.font = "32px Arial";
                     ctx.fillStyle = "#0095DD";
-                    if(!start){
+                    if(!jsBreakOut.start){
                         ctx.fillText("CLICK TO START!", canvas.width/8 , canvas.height/2);
                     } else {
                         ctx.fillText("CLICK TO RESUME!", canvas.width/8, canvas.height/2);
@@ -254,7 +249,7 @@
                             
                         }
                         else {
-                            start = false;
+                            jsBreakOut.start = false;
                             x = canvas.width/2;
                             y = canvas.height-30;
                             dx = 0;
@@ -281,7 +276,7 @@
                     dv = 0;
                 }
 
-                if (start) {
+                if (jsBreakOut.start) {
                     x += dx;
                     y += dy;
                 } else {
@@ -298,7 +293,7 @@
 
             function mainMenu() {
 
-                if(play) {
+                if(jsBreakOut.play) {
                     draw();
                 } else {
                     drawMenu();
