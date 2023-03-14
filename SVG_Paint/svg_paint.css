@@ -1,5 +1,15 @@
 @import url("../portfolio.css");
 
-#svg_paint {
+.svg_paint {
     background-color: lightgray;
+    /* padding-left: 20px; */
+}
+
+.content_block{
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+body {
+    background-color: black;
 }
