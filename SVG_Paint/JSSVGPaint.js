@@ -40,25 +40,14 @@ let js_svg_path_tail = " \" stroke=\"green\" stroke-width\"3\" fill=\"none\"/>";
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("mousedown", mouseDownHandler, false);
 document.addEventListener("mouseup", mouseUpHandler, false);
+// document.addEventListener("ontouchstart", touchStartHandler, false);
 
 
 
 
 function mouseDownHandler(e) {
-    // let svg_paint_rect = svg_paint.getBoundingClientRect();
-    // let js_svg_path_end = js_svg_path.length - 2;
-    // js_svg_rel_x = e.clientX - svg_paint_rect.left;
-    // js_svg_rel_y = e.clientX - svg_paint_rect.top;
-    // let points = "L" + js_svg_rel_x + " " + js_svg_rel_y;
-    // if(pen_down) {
-        // js_svg_path = js_svg_path.substring(0, js_svg_path_end) + points + "/>";
-        // svg_paint.innerHTML = js_svg_path;
-    // } else {
         js_svg_path = js_svg_path + "<path d=\"" + js_svg_path_M + js_svg_path_tail;
         pen_down = true;
-    // }
-    // console.log(js_svg_path);
-    // console.log(js_svg_path_M);
 }
 
 function mouseUpHandler(e) {
@@ -88,11 +77,11 @@ function mouseMoveHandler(e) {
 
 
 
-function JSSVGPaintMain() {
+// function JSSVGPaintMain() {
 
 
-    // requestAnimationFrame(JSSVGPaintMain);    
-}
+//     // requestAnimationFrame(JSSVGPaintMain);    
+// }
 
 
-JSSVGPaintMain();
+// JSSVGPaintMain();
