@@ -12,6 +12,7 @@
             <div class="top_nav_bar">
                 <a href="https://danmanfan.github.io/Portfolio_Daniel_Flynn.html"><p> Home </p></a>
             </div>
+            <div class="title"> <h1> Scalable Vector Graphics Paint </h1></div>
 
             <table>
                 <td>
@@ -25,13 +26,46 @@
                 </td>
                 <td>
                     <!-- <tr> -->
-                        <div class="content_block">
-                            <canvas class="svg_paint" id="svg_color_wheel" width="511" height="256"></canvas>
-                        </div>
+                        <!-- <div class="content_block"> -->
+                            <!-- <canvas class="svg_paint" id="svg_color_wheel" width="511" height="256"></canvas> -->
+                            <!-- <canvas class="svg_paint" id="svg_color_wheel" width="1786" height="200"></canvas> -->
+                        <!-- </div> -->
                     <!-- </tr> -->
+                    <table>
+                        <td>                            
+                            <tr>
+                                <div>
+                                    <input type="range" min="0" max="255" value="0" id="red_slider" class="color_slider">
+                                </div>
+                            </tr>
+                            <tr>
+                                <div>
+                                    <input type="range" min="0" max="255" value="0" id="green_slider" class="color_slider">
+                                </div>
+                            </tr>
+                            <tr>
+                                <div>
+                                    <input type="range" min="0" max="255" value="0" id="blue_slider" class="color_slider">
+                                </div>
+                            </tr>
+                        </td>
+                    </table>
+                </td>
+                <td>
+                    <div class="border">
+                        <canvas id="color_block" width="250" height="250"></canvas>
+                    </div>
                 </td>
             </table>
+
+            
+
+            <div class="footer"><p id="date"> </p></div>
             <script src="JSSVGPaint.js"></script>
+            <script>
+                let date = new Date();
+                document.getElementById("date").innerHTML = "Updated: " + date.toString().substring(4, 15);
+            </script>
         </div>
     
     

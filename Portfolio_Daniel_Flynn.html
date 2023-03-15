@@ -126,9 +126,13 @@ Summer 2022 -->
             </div> <!-- Scroll Content -->
             <div class="footer">
                 <cite>NASA. (2022). Orion’s Moon Crater Close-up. Retrieved February 20, 2023, from https://www.nasa.gov/image-feature/orion-s-moon-crater-close-up. </cite>
-                <p>updated: March 14 2023</p>
+                <p id="date"> </p>
             </div> <!-- footer -->
         </div> <!-- content -->
+        <script>
+            let date = new Date();
+            document.getElementById("date").innerHTML = "Updated: " + date.toString().substring(4, 15);
+        </script>
         <script src="controller.js"></script>
         <script src="Portfolio_Daniel_Flynn_Main.js"></script>
     </body>

@@ -1,5 +1,9 @@
 @import url("../portfolio.css");
 
+.title {
+    background-color: azure;
+}
+
 .svg_paint {
     background-color: lightgray;
     /* padding-left: 20px; */
@@ -8,6 +12,50 @@
 .content_block{
     padding-left: 15px;
     padding-top: 15px;
+}
+
+.color_slider {
+    /* -webkit-appearance: none; */
+    width: 250px;
+    /* outline: none; */
+    /* background-color: orange; */
+}
+
+/* #red_slider.color_slider ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: red;
+}
+
+#red_slider.color_slider ::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: red;
+}
+
+#green_slider ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: green;
+}
+
+#blue_slider ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: blue;
+} */
+
+.border {
+    width: 270px;
+    height: 270px;
+    background-color: azure;
+}
+
+#color_block {
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 body {
