@@ -17,10 +17,56 @@
             <table>
                 <td>
                     <!-- <tr> -->
-                        <!-- https://www.w3schools.com/graphics/svg_intro.asp -->
+                        
                         <div class="content_block">
-                            <svg class="svg_paint" id="svg_paint" width="500" height="500"></svg>
-                            
+
+
+
+                            <!-- <form onsubmit="why(); return false"> -->
+                            <!-- <form onsubmit="download(this['name'].value, 'svg'); return false"> -->
+                            <!-- <form onsubmit="download(document.getElementById('file_name').value, document.getElementById('svg_paint').innerHTML); return false">-->
+                            <form onsubmit="downloadSVG(); return false">
+                                <table>
+
+                                    <td>
+                                        <input type="text" id="file_name" name="name" value="test.svg">
+                                    </td>
+                                        <!-- https://www.w3schools.com/graphics/svg_intro.asp -->
+                                    <td>
+                                        <svg class="svg_paint" id="svg_paint" width="500" height="500" name="svg" > </svg>
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="Download">
+                                        <!-- <button type="button"></button> -->
+                                    </td>
+
+                                </table>
+                            </form>
+
+                            <script>
+                                // https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
+
+
+                                function downloadSVG() {
+                                    
+                                    let file_name = document.getElementById('file_name').value;
+                                    let svg_paint_content = document.getElementById('svg_paint').innerHTML;
+                                    let element = document.createElement('a');
+                                    console.log(svg_paint_content);
+                                    
+                                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' +  encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"500\">" + svg_paint_content + "</svg>")) ;
+                                    // element.setAttribute('href', 'data:svg' + encodeURIComponent(svg_paint_content));
+                                    element.setAttribute('download', file_name);
+
+                                    element.style.display = 'none';
+                                    document.body.appendChild(element);
+                                    element.click();
+                                    document.body.removeChild(element);
+
+                                }
+
+                            </script>
+
                         </div>
                     <!-- </tr> -->
                 </td>
@@ -58,6 +104,7 @@
                 </td>
             </table>
 
+            
             
 
             <div class="footer"><p id="date"> </p></div>

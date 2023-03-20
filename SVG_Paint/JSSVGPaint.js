@@ -37,7 +37,7 @@ let svg_stroke = "\"rgb(" + r_paint + ", " + g_paint + ", " + b_paint + ")\""
 let js_svg_path_M = "M 0 0";
 let js_svg_path = "";
 let pen_down = false;
-let js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width\"3\" fill=\"none\"/>";
+let js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"1\" fill=\"none\"/>";
 
 
 // M = moveto
@@ -81,7 +81,7 @@ function mouseDownHandler(e) {
 
 
     svg_stroke = "\"rgb(" + r_paint + ", " + g_paint + ", " + b_paint + ")\""
-    js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width\"3\" fill=\"none\"/>";
+    js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"1\" fill=\"none\"/>";
     js_svg_path = js_svg_path + "<path d=\"" + js_svg_path_M + js_svg_path_tail;
     pen_down = true;
 }
@@ -107,6 +107,7 @@ function mouseMoveHandler(e) {
     }
 }
 
+// Block color selector that displays current selected color.
 function colorInBlock() {
     r_paint = red_slider.value;
     g_paint = green_slider.value;
@@ -119,6 +120,8 @@ function colorInBlock() {
     color_block_ctx.closePath();
     requestAnimationFrame(colorInBlock);
 }
+
+
 
 
 colorInBlock();

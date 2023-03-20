@@ -21,7 +21,7 @@
     /* background-color: orange; */
 }
 
-/* #red_slider.color_slider ::-webkit-slider-thumb {
+#red_slider.color_slider ::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
@@ -45,7 +45,7 @@
     -webkit-appearance: none;
     appearance: none;
     background: blue;
-} */
+}
 
 .border {
     width: 270px;
