@@ -14,6 +14,20 @@
             </div>
             <div class="title"> <h1> Scalable Vector Graphics Paint </h1></div>
 
+            <div id="file_title">
+                <table>
+                    <form onsubmit="downloadSVG(); return false">
+                        <td>
+                            <input type="text" id="file_name" name="name" value="">
+                        </td>
+                        <td>
+                            <input type="submit" value="Download">
+                            <!-- <button type="button"></button> -->
+                        </td>
+                    </form>
+                </table>
+                
+            </div>
             <table>
                 <td>
                     <!-- <tr> -->
@@ -25,81 +39,60 @@
                             <!-- <form onsubmit="why(); return false"> -->
                             <!-- <form onsubmit="download(this['name'].value, 'svg'); return false"> -->
                             <!-- <form onsubmit="download(document.getElementById('file_name').value, document.getElementById('svg_paint').innerHTML); return false">-->
-                            <form onsubmit="downloadSVG(); return false">
-                                <table>
+                                <!-- <table> -->
 
-                                    <td>
-                                        <input type="text" id="file_name" name="name" value="test.svg">
-                                    </td>
+                                    <!-- <td>
+                                        
+                                    </td> -->
                                         <!-- https://www.w3schools.com/graphics/svg_intro.asp -->
-                                    <td>
-                                        <svg class="svg_paint" id="svg_paint" width="500" height="500" name="svg" > </svg>
-                                    </td>
-                                    <td>
-                                        <input type="submit" value="Download">
-                                        <!-- <button type="button"></button> -->
-                                    </td>
-
-                                </table>
-                            </form>
-
-                            <script>
-                                // https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
+                                    <!-- <td> -->
+                                        <svg class="svg_paint" id="svg_paint" width="800" height="500" name="svg" > </svg>
+                                    <!-- </td> -->
 
 
-                                function downloadSVG() {
-                                    
-                                    let file_name = document.getElementById('file_name').value;
-                                    let svg_paint_content = document.getElementById('svg_paint').innerHTML;
-                                    let element = document.createElement('a');
-                                    console.log(svg_paint_content);
-                                    
-                                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' +  encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"500\">" + svg_paint_content + "</svg>")) ;
-                                    // element.setAttribute('href', 'data:svg' + encodeURIComponent(svg_paint_content));
-                                    element.setAttribute('download', file_name);
-
-                                    element.style.display = 'none';
-                                    document.body.appendChild(element);
-                                    element.click();
-                                    document.body.removeChild(element);
-
-                                }
-
-                            </script>
+                                <!-- </table> -->
+                           
 
                         </div>
-                    <!-- </tr> -->
                 </td>
+                <!-- <td>
+
+                </td> -->
                 <td>
-                    <!-- <tr> -->
-                        <!-- <div class="content_block"> -->
-                            <!-- <canvas class="svg_paint" id="svg_color_wheel" width="511" height="256"></canvas> -->
-                            <!-- <canvas class="svg_paint" id="svg_color_wheel" width="1786" height="200"></canvas> -->
-                        <!-- </div> -->
-                    <!-- </tr> -->
-                    <table>
-                        <td>                            
+                    <div id="color_adjuster">
+                        <table>
+                        
                             <tr>
-                                <div>
-                                    <input type="range" min="0" max="255" value="0" id="red_slider" class="color_slider">
+                                <div class="border">
+                                    <canvas id="color_block" width="100" height="100"></canvas>
                                 </div>
                             </tr>
+
                             <tr>
-                                <div>
-                                    <input type="range" min="0" max="255" value="0" id="green_slider" class="color_slider">
-                                </div>
+                            
+                                <table>
+                                    <td>                            
+                                        <tr>
+                                            <div>
+                                                <input type="range" min="0" max="255" value="0" id="red_slider" class="color_slider">
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div>
+                                                <input type="range" min="0" max="255" value="0" id="green_slider" class="color_slider">
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div>
+                                                <input type="range" min="0" max="255" value="0" id="blue_slider" class="color_slider">
+                                            </div>
+                                        </tr>
+                                    </td>
+                                </table>
+                            
                             </tr>
-                            <tr>
-                                <div>
-                                    <input type="range" min="0" max="255" value="0" id="blue_slider" class="color_slider">
-                                </div>
-                            </tr>
-                        </td>
-                    </table>
-                </td>
-                <td>
-                    <div class="border">
-                        <canvas id="color_block" width="250" height="250"></canvas>
+                        
+                        </table>
                     </div>
                 </td>
             </table>
@@ -109,6 +102,7 @@
 
             <div class="footer"><p id="date"> </p></div>
             <script src="JSSVGPaint.js"></script>
+            <script src="JSSVGMain.js"></script>
             <script>
                 let date = new Date();
                 document.getElementById("date").innerHTML = "Updated: " + date.toString().substring(4, 15);
