@@ -28,6 +28,8 @@ let js_svg_rel_y = 0;
 // let g = 0;
 // let b = 0;
 
+line_button.disabled = true;
+
 // stroke colors
 let r_paint = 0;
 let g_paint = 0;
@@ -47,7 +49,7 @@ let x_pos = 0;
 let y_pos = 0;
 // Rectangle <rect>
 let svg_rect = false;
-svg_rect = true; // testing
+// svg_rect = true; // testing
 let js_svg_rect = "<rect"
 // "<rect width=\"300\" height=\"100\" style=\"fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)\" />";
 let js_svg_rect_x = " x=\"0\"";
@@ -69,7 +71,7 @@ let js_svg_rect_stroke = ";stroke:rgb(0,0,0)\"";
 // Polygon <polygon>
 // Path <path>
 let svg_path = true; // path is true by default
-svg_path = false; // testing
+// svg_path = false; // testing
 
 let js_svg_path_M = "M 0 0";
 let js_svg_path = "";
@@ -251,15 +253,15 @@ function drawPath() {
 //Button calls
 
 function lineOnClick() {
-    // line_button.setAttribute(disabled);
-    // square_button.setAttribute(!disabled);
+    line_button.disabled = true;
+    square_button.disabled = false;
     svg_path = true;
     svg_rect = false;
 }
 
 function squareOnClick() {
-    // square_button.setAttribute(disabled);
-    // line_button.setAttribute(!disabled);
+    square_button.disabled = true;
+    line_button.disabled = false;
     svg_path = false;
     svg_rect = true;
 }
