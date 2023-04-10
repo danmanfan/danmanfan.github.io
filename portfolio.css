@@ -75,7 +75,7 @@ html body {
 }
 
 .Scroll_Content {
-    height: 525px; /* works on desktop but not so well on mobile */
+    height: 75vh;
     overflow-y: auto;
     padding-bottom: 10px;
 }
