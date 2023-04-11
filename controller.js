@@ -13,12 +13,22 @@ document.addEventListener("mousedown", mouseDownHandler, false);
 
 // https://www.w3schools.com/jsref/obj_touchevent.asp
 document.addEventListener("touchmove", mouseMoveHandler);
-document.addEventListener("touchStart", mouseDownHandler);
+document.addEventListener("touchstart", mouseDownHandler);
 
 
 function mouseDownHandler(e){
     let client_x = e.clientX;
     let client_y = e.clientY;
+    if(e.type == "touchstart") {
+        let touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        client_x = touch.pageX;
+        client_y = touch.pageY;
+    } else {
+        client_x = e.clientX;
+        client_y = e.clientY;
+    }
+
+
     mouseDownHelper(breakout_canvas, client_x, client_y, jsBreakOut);
 
     
@@ -41,17 +51,24 @@ function mouseDownHelper(the_canvas, the_client_x, the_client_y, the_game_cons) 
         the_game_cons.play = false;
     }
 
-    console.log(the_game_cons.play);
 }
 
 
 
 
 function mouseMoveHandler(e) {
-    let client_x = e.clientX;
-    let client_y = e.clientY;
-    mouseMoveHelper(breakout_canvas, client_x, client_y, jsBreakOut, paddleMoveHandler);
-    // console.log(js_breakout.hover);
+    let client_x = 0;
+    let client_y = 0;
+    // https://stackoverflow.com/questions/41993176/determine-touch-position-on-tablets-with-javascript
+    if(e.type == "touchmove") {
+        let touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        client_x = touch.pageX;
+        client_y = touch.pageY;
+    } else {
+        client_x = e.clientX;
+        client_y = e.clientY;
+    }
+        mouseMoveHelper(breakout_canvas, client_x, client_y, jsBreakOut, paddleMoveHandler);
 }
 
 
