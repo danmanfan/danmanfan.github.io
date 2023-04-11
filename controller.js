@@ -20,7 +20,8 @@ function mouseDownHandler(e){
     let client_x = e.clientX;
     let client_y = e.clientY;
     if(e.type == "touchstart") {
-        let touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        let e_cond = (typeof e.originalEvent === "undefined")? e : e.originalEvent;
+        let touch = e_cond.touches[0] || e_cond.changedTouches[0];
         client_x = touch.pageX;
         client_y = touch.pageY;
     } else {
@@ -61,7 +62,9 @@ function mouseMoveHandler(e) {
     let client_y = 0;
     // https://stackoverflow.com/questions/41993176/determine-touch-position-on-tablets-with-javascript
     if(e.type == "touchmove") {
-        let touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        //                         condition          =       true : false
+        let e_cond = (typeof e.originalEvent === "undefined")? e : e.originalEvent;
+        let touch = e_cond.touches[0] || e_cond.changedTouches[0];
         client_x = touch.pageX;
         client_y = touch.pageY;
     } else {
