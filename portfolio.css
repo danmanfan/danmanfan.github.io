@@ -32,9 +32,7 @@
 } */
 
 
-/* .title {
 
-} */
 
 
 
@@ -43,6 +41,12 @@
     /* background-color: azure;
     opacity: 50%; */
 /* } */
+
+
+.title {
+    padding-left: 2vw;
+}
+
 
 html body {
     margin: 0;
@@ -53,6 +57,8 @@ html body {
 
 
 .CV_Content {
+    padding-left: 2vw;
+    padding-right: 2vw;
     background-color: azure;
     opacity: 75%;
 }
@@ -66,6 +72,7 @@ html body {
 }
 
 .content {
+    padding-left: 2vw;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -74,8 +81,10 @@ html body {
     /* overflow-y: scroll; */
 }
 
+
 .Scroll_Content {
-    height: 75vh;
+    /* padding-left: 2vw; */
+    height: 73vh;
     overflow-y: auto;
     padding-bottom: 10px;
 }
@@ -131,7 +140,9 @@ html body {
     width: 100%;
     background-color: #666;
     overflow: hidden;
-    height: 50px;
+    /* height: 50px; */
+    height: 7vh;
+    padding-left: 2vw;
 }
 
 .top_nav_bar a {
@@ -172,5 +183,5 @@ html body {
     width: 100%;
     background-color: #666;
     overflow: hidden;
-    
+    padding-left: 2vw;
 }

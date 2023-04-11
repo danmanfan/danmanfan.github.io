@@ -6,9 +6,14 @@ let line_button = document.getElementById("line_button");
 let square_button = document.getElementById("square_button");
 
 // let svg_color_wheel = document.getElementById("svg_color_wheel");
+
+// color sliders
 let red_slider = document.getElementById("red_slider");
 let green_slider = document.getElementById("green_slider");
 let blue_slider = document.getElementById("blue_slider");
+
+//stroke width slider
+let stroke_width_slider = document.getElementById("stroke_width");
 
 let color_block = document.getElementById("color_block");
 let color_block_ctx = color_block.getContext("2d");
@@ -35,8 +40,11 @@ let r_paint = 0;
 let g_paint = 0;
 let b_paint = 0;
 
+// stroke width
+let storke_width = 2;
 
-let refresh_point = 0;
+
+let refresh_point = 3;
 
 // text inside of a svg file
 let js_svg_obj = "";
@@ -59,7 +67,7 @@ let js_svg_rect_height = " height=\"0\"";
 let js_svg_rect_style = " style=";
 // Might me used for others:
 let js_svg_rect_fill = "\"fill:none";
-let js_svg_rect_stroke_width = ";stroke-width:3";
+let js_svg_rect_stroke_width = ";stroke-width:";
 let js_svg_rect_stroke = ";stroke:rgb(0,0,0)\"";
 
 
@@ -76,7 +84,7 @@ let svg_path = true; // path is true by default
 let js_svg_path_M = "M 0 0";
 let js_svg_path = "";
 let pen_down = false;
-let js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"1\" fill=\"none\"/>";
+let js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"2\" fill=\"none\"/>";
 
 
 // M = moveto
@@ -110,7 +118,7 @@ function mouseDownHandler(e) {
     
     if(svg_path) {
         
-        js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"1\" fill=\"none\"/>";
+        js_svg_path_tail = " \" stroke=" + svg_stroke + "stroke-width=\"" + storke_width + "\" fill=\"none\"/>";
         js_svg_obj = js_svg_obj + "<path d=\"" + js_svg_path_M + js_svg_path_tail;
         // js_svg_path = js_svg_path + "<path d=\"" + js_svg_path_M + js_svg_path_tail;
     } else if (svg_rect) {
@@ -159,7 +167,7 @@ function mouseMoveHandler(e) {
             js_svg_rect_height = js_svg_rect_height.substring(0,8) + "\"" + temp_height + "\"";
 
             let temp_js_svg_obj = js_svg_rect + " x=" + "\"" + temp_x + "\"" + " y=" + "\"" + temp_y + "\""
-            + js_svg_rect_width + js_svg_rect_height + js_svg_rect_style + js_svg_rect_fill + js_svg_rect_stroke_width 
+            + js_svg_rect_width + js_svg_rect_height + js_svg_rect_style + js_svg_rect_fill + js_svg_rect_stroke_width + storke_width
             + js_svg_rect_stroke.substring(0,12) + r_paint + ", " + g_paint + ", " + b_paint + ")\"" + "/>";
             js_svg_obj = js_svg_obj.substring(0, refresh_point) + temp_js_svg_obj;
             svg_paint.innerHTML = js_svg_obj; // delete previous square
@@ -184,6 +192,10 @@ function colorInBlock() {
     color_block_ctx.fill();
     color_block_ctx.closePath();
     // requestAnimationFrame(colorInBlock);
+}
+
+function strokeWidth() {
+    storke_width = stroke_width_slider.value;
 }
 
 function displayTitleName() {
@@ -237,6 +249,7 @@ function downloadSVG() {
 
 function jsSVGPaintRunner() {
     colorInBlock();
+    strokeWidth();
 }
 
 function drawPath() {

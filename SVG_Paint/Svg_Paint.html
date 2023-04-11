@@ -30,8 +30,8 @@
             </div>
             <table>
                 <td>
-                    <div>
-                        <table>         
+                    <div id="shape_button_table">
+                        <table >         
                             <tr>
                                 <div>
                                     <button id="line_button" onclick="lineOnClick()">
@@ -76,7 +76,7 @@
                         
                             <tr>
                                 <div class="border">
-                                    <canvas id="color_block" width="100" height="100"></canvas>
+                                    <canvas id="color_block"></canvas>
                                 </div>
                             </tr>
 
@@ -97,6 +97,11 @@
                                         <tr>
                                             <div>
                                                 <input type="range" min="0" max="255" value="0" id="blue_slider" class="color_slider">
+                                            </div>
+                                        </tr>
+                                        <tr>
+                                            <div>
+                                                <input type="range" min="0.1" max="10" value="2" id="stroke_width" class="stroke_slider">
                                             </div>
                                         </tr>
                                     </td>
