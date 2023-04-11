@@ -11,6 +11,10 @@ document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("mousedown", mouseDownHandler, false);
 
+// https://www.w3schools.com/jsref/obj_touchevent.asp
+document.addEventListener("touchmove", mouseMoveHandler);
+document.addEventListener("touchStart", mouseDownHandler);
+
 
 function mouseDownHandler(e){
     let client_x = e.clientX;
