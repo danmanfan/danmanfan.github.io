@@ -259,6 +259,7 @@ function drawPath() {
     js_svg_obj = js_svg_obj.substring(0, js_svg_path_end) + points + js_svg_path_tail;
     // js_svg_path = js_svg_path.substring(0, js_svg_path_end) + points + js_svg_path_tail;
     svg_paint.innerHTML = js_svg_obj;
+    
 }
 
 
