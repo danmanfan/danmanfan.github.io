@@ -142,14 +142,15 @@ html body {
     overflow: hidden;
     /* height: 50px; */
     height: 7vh;
-    padding-left: 2vw;
+    padding-left: 1vw;
 }
 
 .top_nav_bar a {
     float: left;
     color:aliceblue;
     text-align: center;
-    padding-left: 14px;
+    padding-left: 1vw;
+    padding-right: 1vw;
     /* padding: 14px 16px; */
     text-decoration: none;
     font-size: 17px;
