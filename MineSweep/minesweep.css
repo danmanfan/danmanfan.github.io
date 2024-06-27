@@ -8,9 +8,10 @@ html body {
 
 
 #minesweeper {
-    width: 75vw;
-    height: 75vh;
-    background-color: bisque;
+    width: 100vw;
+    height: 100vh;
+    /* background-color: bisque; */
+    background-color: black;
 }
 
 #minesweeper_canvas{
