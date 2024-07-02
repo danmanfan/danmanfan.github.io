@@ -1,6 +1,10 @@
 
 
 let mine_canvas = document.getElementById("minesweeper_canvas");
+let flagDoc = document.getElementById("flag");
+let numbOfMineDoc = document.getElementById("number_of_mines");
+let updateInfoDoc = document.getElementById("update_info");
+let headerDoc = document.getElementById("header");
 let mine_ctx = mine_canvas.getContext("2d");
 let scale = mine_canvas.width / mine_canvas.getBoundingClientRect().width;
 mine_ctx.font = 3 * scale + "vw Georgia";
@@ -10,8 +14,11 @@ let padding = mine_canvas.width/100;
 let line_padding = padding / 10;
 var numb_of_mines = 25;
 
+// Let user move around the mine field.
+let scroll_right = 0;
+let scroll_down = 0;
 
-
+let flag = false;
 
 let xClick = -1;
 let yClick = -1;
@@ -42,7 +49,7 @@ let biv = false;
 for(let ii = 0; ii < minesweep_rows; ii++) {
     minesweep[ii] = [];
     for(let jj = 0; jj <  minesweep_col; jj++) {
-        minesweep[ii][jj] = {value: 0, hidden: true, bomb: false};
+        minesweep[ii][jj] = {value: 0, hidden: true, bomb: false, flagged: false};
     }
 }
 
@@ -118,20 +125,36 @@ function drawSquares() {
                 let squareY = (dsi * (block_length+line_padding)) + (padding * 2) + timer_size; //
                 if(xClick > squareX && xClick < squareX + block_length){
                     if(yClick > squareY && yClick < squareY + block_length){
-                        block.hidden = false;
-                        if(block.value == 10) {
-                            xClick = -1;
-                            yClick = -1;
-                            // drawSquares();
+                        xClick = -1;
+                        yClick = -1;
+                        if(flag) {
+                            if(block.hidden) {
+                                // block.flagged = !block.flagged; // careful here.
+                                if(block.flagged) {
+                                    block.flagged = false;
+                                } else {
+                                    block.flagged = true;
+                                }
+                            }
+                        } else {
+                            if(!block.flagged) {
+                                block.hidden = false;
+                                if(block.value == 10) {
 
-                            gameOver = true;
-                            if(gameOver) {
-                                revealMines();
-                                alert("GAME OVER");
-                                document.location.reload();
+                                    // drawSquares();
+        
+                                    gameOver = true;
+                                    if(gameOver) {
+                                        revealMines();
+                                        alert("GAME OVER");
+                                        document.location.reload();
+                                    }
+                                }
+
                             }
 
                         }
+
                     }
                 }
                 
@@ -142,6 +165,15 @@ function drawSquares() {
                     mine_ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
                     mine_ctx.rect(squareX, squareY, block_length, block_length);
                     mine_ctx.fill();
+                    
+                    if(block.flagged) {
+                        mine_ctx.fillStyle = "black";
+                        mine_ctx.moveTo(squareX, squareY + block_length);
+                        mine_ctx.lineTo(squareX + (block_length/2), squareY);
+                        mine_ctx.lineTo(squareX + block_length, squareY + block_length);
+                        mine_ctx.lineTo(squareX, squareY + block_length);
+                        mine_ctx.fill();
+                    }
                     mine_ctx.closePath();
 
                 } else {
@@ -156,7 +188,7 @@ function drawSquares() {
                 mine_ctx.beginPath();
                 // mine_ctx.fillStyle = "black";
                 mine_ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
-                mine_ctx.fillText("H: " + timer.hour + "  M: " + timer.minute + "  S: " + timer.sec 
+                mine_ctx.fillText(timer.hour + ":" + timer.minute + ":" + timer.sec 
                     // + "." + (timer.milisec - (timer.milisec %10))
                     , timer_x + timer_size/8, timer_y + (timer_size/4 * 3));
                 mine_ctx.closePath();
@@ -280,7 +312,26 @@ function mouseDownHelper(the_canvas, the_client_x, the_client_y) {
 
 
 
+function flagOnClick() {
+    
+    if(flag) {
+        flag = false;
+    } else{
+        
+        flag = true;
+    }
+}
+
+
 function main() {
+    flagDoc.style.color = "black";
+    if(flag) {
+        flagDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+    numbOfMineDoc.innerHTML = numb_of_mines;
+    numbOfMineDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+    updateInfoDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+    headerDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
     drawSquares();
     requestAnimationFrame(main);
 }

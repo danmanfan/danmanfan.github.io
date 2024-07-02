@@ -1,11 +1,15 @@
 
 html body {
+    background-color: black;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
-
+/* 
+#header {
+    background-color: black;
+} */
 
 #minesweeper {
     width: 100vw;
@@ -17,5 +21,7 @@ html body {
 #minesweeper_canvas{
     width: 75vw;
     height: 75vh;
+    /* overflow-y: auto;
+    overflow-x: auto; */
 }
 

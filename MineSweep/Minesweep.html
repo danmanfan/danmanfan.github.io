@@ -8,11 +8,68 @@
     </head>
 
     <body>
-        <h1>Minesweeper</h1>
+        <h1 id="header">Minesweeper</h1>
         <div id="minesweeper">
-            <canvas id="minesweeper_canvas"> </canvas>
-            <script src="minesweep.js"></script>
+            <table>
+                <tr>
+                    <td>
+                        <canvas id="minesweeper_canvas"> </canvas>
+                        
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <button>
+                                        minus
+                                    </button>
+                                </td>
+                                <td>
+                                    <div id="number_of_mines">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <button>
+                                        plus
+                                    </button>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button>
+                                        left
+                                    </button>
+                                </td>
+                                <td>
+                                    <button>
+                                        right
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="flag" onclick="flagOnClick()">
+                                        flag
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p id="update_info">
+                            Added a flag button to help solve this puzzle. Flag is currently the only functioning button at the moment. Scrolling, selecting the number of mines and size of the puzzle is next on todo list!
+                        </p>
+                    </td>          
+                </tr>
+
+            </table>
+
         </div>
+        <script src="minesweep.js"></script>
     </body>
 
 </html>
