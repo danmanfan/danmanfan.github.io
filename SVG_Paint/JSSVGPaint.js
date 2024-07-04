@@ -231,8 +231,7 @@ function downloadSVG() {
     
         let file_name_value = file_name.value + ".svg";
 
-        
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' +  encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"500\">" + svg_paint_content + "</svg>")) ;
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' +  encodeURIComponent("<?xml version=\"1.0\" encoding=\"UTF-8\"?> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100vw\" height=\"100vh\">" + svg_paint_content + "</svg>")) ;
         // element.setAttribute('href', 'data:svg' + encodeURIComponent(svg_paint_content));
         element.setAttribute('download', file_name_value);
 

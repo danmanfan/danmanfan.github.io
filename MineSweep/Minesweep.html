@@ -17,10 +17,10 @@
                         
                     </td>
                     <td>
-                        <table>
+                        <table id="test">
                             <tr>
                                 <td>
-                                    <button>
+                                    <button id="less_mines" onclick="lessMines()">
                                         minus
                                     </button>
                                 </td>
@@ -30,7 +30,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button>
+                                    <button id="more_mines" onclick="moreMines()">
                                         plus
                                     </button>
                                 </td>
@@ -38,13 +38,59 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <button>
+                                    <button id="row_minus" onclick="lessRows()">
+                                        row minus
+                                    </button>
+                                </td>
+                                <td>
+                                    <div id="number_of_rows">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <button id="row_plus" onclick="moreRows()">
+                                        row plus
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="col_minus" onclick="lessCol()">
+                                        col minus
+                                    </button>
+                                </td>
+                                <td>
+                                    <div id="number_of_col">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <button id="col_plus" onclick="moreCol()">
+                                        col plus
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="move_left" onclick="moveLeft()">
                                         left
                                     </button>
                                 </td>
                                 <td>
-                                    <button>
+                                    <button id="move_right" onclick="moveRight()">
                                         right
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="move_up" onclick="moveUp()">
+                                        up
+                                    </button>
+                                </td>
+                                <td>
+                                    <button id="move_down" onclick="moveDown()">
+                                        down
                                     </button>
                                 </td>
                             </tr>
@@ -54,21 +100,31 @@
                                         flag
                                     </button>
                                 </td>
+                                <td>
+                                    <div id="number_of_flags">
+
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td>
-                        <p id="update_info">
-                            Added a flag button to help solve this puzzle. Flag is currently the only functioning button at the moment. Scrolling, selecting the number of mines and size of the puzzle is next on todo list!
-                        </p>
+
                     </td>          
-                </tr>
+                </tr> -->
 
             </table>
 
         </div>
+        <p id="update_info">
+            Added a flag button to help solve this puzzle. Flag is currently the only functioning button at the moment. Scrolling, selecting the number of mines and size of the puzzle is next on todo list.
+        <br>
+            updated 07/07/2024
+        <br>    
+            We can now scroll up, down, left and right. We can increase or decrease the number of rows / columns. We can also increase / decrease the number of mines. If all the mines are flagged, a game over popup with the final time taken to solve the puzzle is shown.
+        </p>
         <script src="minesweep.js"></script>
     </body>
 

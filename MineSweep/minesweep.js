@@ -1,44 +1,64 @@
+// Daniel Flynn
+// Summer 2024
 
-
+// canvas fields
 let mine_canvas = document.getElementById("minesweeper_canvas");
-let flagDoc = document.getElementById("flag");
-let numbOfMineDoc = document.getElementById("number_of_mines");
-let updateInfoDoc = document.getElementById("update_info");
-let headerDoc = document.getElementById("header");
 let mine_ctx = mine_canvas.getContext("2d");
 let scale = mine_canvas.width / mine_canvas.getBoundingClientRect().width;
 mine_ctx.font = 3 * scale + "vw Georgia";
+let xClick = -1;
+let yClick = -1;
+let gameOver = false;
+
+
+// flag button fields
+let flagDoc = document.getElementById("flag");
+let number_of_flagsDoc = document.getElementById("number_of_flags");
+
+// mine fields
+let numbOfMineDoc = document.getElementById("number_of_mines");
+let less_mines_button = document.getElementById("less_mines");
+let more_mines_button = document.getElementById("more_mines");
+let numbOfRowsDoc = document.getElementById("number_of_rows");
+let numbOfColDoc = document.getElementById("number_of_col");
 let block_length = mine_canvas.width / 25; // magic number
 let mine_radius = block_length;
 let padding = mine_canvas.width/100;
 let line_padding = padding / 10;
-var numb_of_mines = 25;
+let numb_of_mines = 25;
+let flag = false;
+var minesweep_rows = 10;
+var minesweep_col = 10;
+// let max_row_col = 1000; // goal
+let max_row_col = 250;
+let rowIndx = 0;
+let colIndx = 0;
+var minesweep = [];
+var mines = [];
+
+// update info fields
+let updateInfoDoc = document.getElementById("update_info");
+
+// header fields
+let headerDoc = document.getElementById("header");
+
+// scroll fields
 
 // Let user move around the mine field.
 let scroll_right = 0;
 let scroll_down = 0;
 
-let flag = false;
+let numb_of_flags = numb_of_mines;
 
-let xClick = -1;
-let yClick = -1;
 
-let gameOver = false;
-
-var minesweep_rows = 10;
-var minesweep_col = 10;
-
-var minesweep = [];
-
-var mines = [];
-
+// timer fields
 let then = Date.now();
-
 let timer = {hour:0, minute:0, sec:0, milisec:0};
 let timer_x = padding;
 let timer_y = padding;
 let timer_size = mine_canvas.height/ 10;
 
+// color fields
 let r = 255;
 let g = 0;
 let b = 0;
@@ -46,45 +66,128 @@ let roy = true;
 let gee = false;
 let biv = false;
 
-for(let ii = 0; ii < minesweep_rows; ii++) {
-    minesweep[ii] = [];
-    for(let jj = 0; jj <  minesweep_col; jj++) {
-        minesweep[ii][jj] = {value: 0, hidden: true, bomb: false, flagged: false};
+
+
+function initialize() {
+    rowIndx = 0;
+    colIndx = 0;
+    mines=[];
+    minesweep=[];
+    timer = {hour:0, minute:0, sec:0, milisec:0};
+    for(let ii = 0; ii < minesweep_rows; ii++) {
+        minesweep[ii] = [];
+        for(let jj = 0; jj <  minesweep_col; jj++) {
+            minesweep[ii][jj] = {value: 0, hidden: true, bomb: false, flagged: false};
+        }
     }
-}
-
-var mine_count = 0;
-
-// needs to be a function
-while(mine_count < numb_of_mines) {
-    for(let i = 0; i < minesweep_rows; i++) {
-        for(let j = 0; j < minesweep_col; j++) {
-            var rand = Math.floor(Math.random() * 100);
-            if(rand < 10 && minesweep[i][j].value < 10) {
-                minesweep[i][j].value = 10;
-                minesweep[i][j].bomb = true;
-                mines[mines.length] = minesweep[i][j];
-                mine_count++;
-                // needs to be a function 
-                for(let k = -1; k < 2; k++) { 
-                    for (let l = -1; l < 2; l++) {
-                        if(i + k > -1 && i + k < minesweep_rows) {
-                            if(j + l > -1 && j + l < minesweep_col) {
-                                if(minesweep[i+k][j+l].value < 10) {
-                                    minesweep[i+k][j+l].value ++;
+    if(numb_of_mines > (minesweep_rows * minesweep_col) - 1){
+        numb_of_mines = Math.ceil(minesweep_rows * minesweep_col / 4);
+    }
+    numb_of_flags = numb_of_mines;
+    var mine_count = 0;
+    
+    // needs to be a function
+    while(mine_count < numb_of_mines) {
+        for(let i = 0; i < minesweep_rows; i++) {
+            for(let j = 0; j < minesweep_col; j++) {
+                var rand = Math.floor(Math.random() * 100);
+                if(rand < 10 && minesweep[i][j].value < 10) {
+                    minesweep[i][j].value = 10;
+                    minesweep[i][j].bomb = true;
+                    // mines[mines.length] = minesweep[i][j];
+                    mines[mines.length] = {x: i, y: j};
+                    mine_count++;
+                    // needs to be a function 
+                    for(let k = -1; k < 2; k++) { 
+                        for (let l = -1; l < 2; l++) {
+                            if(i + k > -1 && i + k < minesweep_rows) {
+                                if(j + l > -1 && j + l < minesweep_col) {
+                                    if(minesweep[i+k][j+l].value < 10) {
+                                        minesweep[i+k][j+l].value ++;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                if (mine_count == numb_of_mines) {
+                    break;
+                }
             }
-            if (mine_count == numb_of_mines) {
+            if(mine_count == numb_of_mines) {
                 break;
             }
         }
-        if(mine_count == numb_of_mines) {
-            break;
-        }
+    }
+    
+}
+
+
+function lessMines() {
+    if(numb_of_mines > 1) {
+        numb_of_mines--;
+        initialize();
+    }
+
+}
+
+function moreMines() {
+    let numberOfBlocks = minesweep_col * minesweep_rows;
+    if(numb_of_mines < numberOfBlocks - 1) {
+        numb_of_mines++;
+        initialize();
+    }
+}
+
+function lessRows() {
+    if(minesweep_rows > 1) {
+        minesweep_rows--;
+        initialize();
+    }
+}
+
+function moreRows() {
+    if(minesweep_rows < max_row_col) {
+        minesweep_rows++;
+        initialize();
+    }
+}
+
+function lessCol() {
+    if(minesweep_col > 1) {
+        minesweep_col--;
+        initialize();
+    }
+}
+
+function moreCol() {
+    if(minesweep_col < max_row_col) {
+        minesweep_col++;
+        initialize();
+    }
+}
+
+function moveRight(){
+    if(rowIndx < minesweep_col - 10) {
+        rowIndx++;
+    }
+}
+
+function moveLeft(){
+    if(rowIndx > 0) {
+        rowIndx--;
+    }
+}
+
+function moveUp() {
+    if(colIndx > 0) {
+        colIndx--;
+    }
+}
+
+function moveDown(){
+    if(colIndx < minesweep_rows - 10) {
+        colIndx++;
     }
 }
 
@@ -118,23 +221,35 @@ function drawSquares() {
         mine_ctx.closePath();
         // mine_ctx.closePath();
 
-        for(let dsi = 0; dsi < minesweep_rows; dsi++) {
-            for(let dsj = 0; dsj < minesweep_col; dsj++) {
+        for(let dsi = colIndx; dsi < minesweep_rows; dsi++) {
+            for(let dsj = rowIndx; dsj < minesweep_col; dsj++) {
+
+                let xIndx = dsj - rowIndx;
+                let yIndx = dsi - colIndx;
+
                 let block = minesweep[dsi][dsj];
-                let squareX = (dsj * (block_length+line_padding)) + padding ; //magic number :padding of one, magic number : square offset left 
-                let squareY = (dsi * (block_length+line_padding)) + (padding * 2) + timer_size; //
+                let squareX = (xIndx * (block_length+line_padding)) + padding ; //magic number :padding of one, magic number : square offset left 
+                let squareY = (yIndx * (block_length+line_padding)) + (padding * 2) + timer_size; //
                 if(xClick > squareX && xClick < squareX + block_length){
                     if(yClick > squareY && yClick < squareY + block_length){
                         xClick = -1;
                         yClick = -1;
                         if(flag) {
                             if(block.hidden) {
+                                
                                 // block.flagged = !block.flagged; // careful here.
                                 if(block.flagged) {
                                     block.flagged = false;
+                                    numb_of_flags++;
                                 } else {
-                                    block.flagged = true;
+                                    if(numb_of_flags > 0){
+                                        block.flagged = true;
+                                        numb_of_flags--;
+                                        minesFound();
+                                    }
+
                                 }
+                                
                             }
                         } else {
                             if(!block.flagged) {
@@ -202,10 +317,28 @@ function drawSquares() {
 
 function revealMines() {
     for(let i = 0; i < mines.length; i++) {
-        mines[i].hidden = false;
+        minesweep[mines[i].x][mines[i].y].hidden=false;
+        // mines[i].hidden = false;
+        
     }
 }
 
+function minesFound() {
+    let allMinesFound = true;
+    for(let k = 0; k < mines.length; k++) {
+        let tempX = mines[k].x;
+        let tempY = mines[k].y;
+        if(minesweep[tempX][tempY].flagged == false){
+        // if(!mines[i].flagged) {
+            allMinesFound = false;
+            break;
+        }
+    }
+    if(allMinesFound) {
+        alert("All the mines have been found! \n" + timer.hour + ":" + timer.minute + ":" + timer.sec);
+        document.location.reload();
+    }
+}
 
 
 // minesweep[1][3].hidden = false;
@@ -289,19 +422,6 @@ function mouseDownHandler(e){
     }
     mouseDownHelper(mine_canvas, client_x, client_y);
 
-    // drawSquares();
-    // if(gameOver) {
-    //     revealMines();
-        
-    //     // let then = Date.now();
-    //     // let now = then;
-    //     // while(now - then < 200){
-    //     //     now = Date.now();
-    //     // }
-    //     alert("GAME OVER");
-    //     drawSquares();
-    //     document.location.reload();
-    // }
 }
 
 function mouseDownHelper(the_canvas, the_client_x, the_client_y) {
@@ -328,14 +448,27 @@ function main() {
     if(flag) {
         flagDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
     }
+    
+    numbOfRowsDoc.innerHTML = minesweep_rows;
+    numbOfRowsDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+    numbOfColDoc.innerHTML = minesweep_col;
+    numbOfColDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
     numbOfMineDoc.innerHTML = numb_of_mines;
     numbOfMineDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+    number_of_flagsDoc.innerHTML = numb_of_flags;
+    number_of_flagsDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+
+
     updateInfoDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
     headerDoc.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+
+
+
     drawSquares();
     requestAnimationFrame(main);
 }
 
+initialize();
 main();
 
 
