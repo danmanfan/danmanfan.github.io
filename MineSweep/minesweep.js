@@ -262,7 +262,8 @@ function drawSquares() {
                                     if(gameOver) {
                                         revealMines();
                                         alert("GAME OVER");
-                                        document.location.reload();
+                                        // document.location.reload();
+                                        initialize();
                                     }
                                 }
 
@@ -336,7 +337,8 @@ function minesFound() {
     }
     if(allMinesFound) {
         alert("All the mines have been found! \n" + timer.hour + ":" + timer.minute + ":" + timer.sec);
-        document.location.reload();
+        initialize();
+        // document.location.reload();
     }
 }
 
