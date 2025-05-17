@@ -246,53 +246,6 @@ function drawSquares() {
                 let block = minesweep[dsi][dsj];
                 let squareX = (xIndx * (block_length+line_padding)) + padding ; //magic number :padding of one, magic number : square offset left 
                 let squareY = (yIndx * (block_length+line_padding)) + (padding * 2) + timer_size; //
-                if(xClick > squareX && xClick < squareX + block_length){
-                    if(yClick > squareY && yClick < squareY + block_length){
-                        xClick = -1;
-                        yClick = -1;
-                        if(flag) {
-                            if(block.hidden) {
-                                
-                                // block.flagged = !block.flagged; // careful here.
-                                if(block.flagged) {
-                                    block.flagged = false;
-                                    numb_of_flags++;
-                                } else {
-                                    if(numb_of_flags > 0){
-                                        block.flagged = true;
-                                        numb_of_flags--;
-                                        minesFound();
-                                    }
-
-                                }
-                                
-                            }
-                        } else {
-                            if(!block.flagged) {
-
-                                block.hidden = false;
-                                if(block.value == 10) {
-
-                                    // drawSquares();
-        
-                                    gameOver = true;
-                                    if(gameOver) {
-                                        revealMines();
-                                        alert("GAME OVER");
-                                        // document.location.reload();
-                                        initialize();
-                                    }
-                                }
-                                // if (block.value == 0) {
-                                    
-                                // }
-
-                            }
-
-                        }
-
-                    }
-                }
                 
                 if(block.hidden) {
 
@@ -425,6 +378,132 @@ function rainbow(){
 }
 
 
+function blockClick() {
+    xidx = Math.floor((xClick - padding)/(block_length+line_padding)) + rowIndx;
+    yidx = Math.floor((yClick-(2*padding)-timer_size )/(block_length+line_padding)) + colIndx;
+    if(xidx < minesweep_rows){
+        if(yidx < minesweep_col){
+            let block = minesweep[yidx][xidx];
+            xClick = -1;
+            yClick = -1;
+            if(flag) {
+                if(block.hidden) {
+                    
+                    // block.flagged = !block.flagged; // careful here.
+                    if(block.flagged) {
+                        block.flagged = false;
+                        numb_of_flags++;
+                    } else {
+                        if(numb_of_flags > 0){
+                            block.flagged = true;
+                            numb_of_flags--;
+                            minesFound();
+                        }
+
+                    }
+                    
+                }
+            } else {
+                if(!block.flagged) {
+                    blockReveal(yidx, xidx);
+
+            //         block.hidden = false;
+            //         if(block.value == 10) {
+
+            //             // drawSquares();
+
+            //             gameOver = true;
+            //             if(gameOver) {
+            //                 revealMines();
+            //                 alert("GAME OVER");
+            //                 // document.location.reload();
+            //                 initialize();
+            //             }
+            //         }
+            //         // if(block.value == 0){
+
+            //         // }
+
+            //         // if (block.value == 0) {
+                        
+            //         // }
+
+                }
+
+            }           
+        }
+    }
+        
+
+    // if(xClick > squareX && xClick < squareX + block_length){
+    //     if(yClick > squareY && yClick < squareY + block_length){
+    //     }
+    // }
+}
+
+
+function blockReveal(y,x) {
+    if(y > -1 & y < minesweep_rows){
+        if(x > -1 & x < minesweep_col) {
+            let block = minesweep[y][x];
+            // block.hidden = false;
+            if(block.value == 10) {
+                block.hidden = false;
+                // drawSquares();
+
+                gameOver = true;
+                if(gameOver) {
+                    revealMines();
+                    alert("GAME OVER");
+                    // document.location.reload();
+                    initialize();
+                }
+            }
+            // if(block.value == 0){
+            if(block.value == 0 & block.hidden){
+                for(let yi = y-1; yi < y+2;yi++){
+                    for(let xj = x-1; xj < x+2;xj++){
+                        block.hidden = false;
+                        // if(yi != y & xj != x){
+                        blockReveal(yi,xj);
+                        // }
+                    }
+                }
+            } else {
+                block.hidden = false;
+            }
+            
+        }
+    }
+    
+    // if(flag) {
+    //     if(block.hidden) {
+            
+    //         // block.flagged = !block.flagged; // careful here.
+    //         if(block.flagged) {
+    //             block.flagged = false;
+    //             numb_of_flags++;
+    //         } else {
+    //             if(numb_of_flags > 0){
+    //                 block.flagged = true;
+    //                 numb_of_flags--;
+    //                 minesFound();
+    //             }
+
+    //         }
+            
+    //     }
+    // } else {
+        // if(!block.flagged) {
+
+
+
+        // }
+
+    // }    
+}
+
+
 // left click to reveal square
 mine_canvas.addEventListener("mousedown", mouseDownHandler, false);
 mine_canvas.addEventListener("touchstart", mouseDownHandler);
@@ -443,8 +522,11 @@ function mouseDownHandler(e){
         client_y = e.clientY;
     }
     mouseDownHelper(mine_canvas, client_x, client_y);
-
+    blockClick();
 }
+
+
+
 
 function mouseDownHelper(the_canvas, the_client_x, the_client_y) {
     let canvas_client_rect = the_canvas.getBoundingClientRect();
