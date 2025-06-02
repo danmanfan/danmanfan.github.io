@@ -381,8 +381,8 @@ function rainbow(){
 function blockClick() {
     xidx = Math.floor((xClick - padding)/(block_length+line_padding)) + rowIndx;
     yidx = Math.floor((yClick-(2*padding)-timer_size )/(block_length+line_padding)) + colIndx;
-    if(xidx < minesweep_rows){
-        if(yidx < minesweep_col){
+    if(xidx < minesweep_col){
+        if(yidx < minesweep_rows){
             let block = minesweep[yidx][xidx];
             xClick = -1;
             yClick = -1;
