@@ -59,6 +59,8 @@ html body {
 .CV_Content {
     padding-left: 2vw;
     padding-right: 2vw;
+    /* padding-top: 0.5vw; */
+    /* padding-bottom: 0.5vw; */
     background-color: azure;
     opacity: 75%;
 }
@@ -86,7 +88,7 @@ html body {
     /* padding-left: 2vw; */
     height: 73vh;
     overflow-y: auto;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .mamorlis {
